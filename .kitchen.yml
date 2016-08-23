@@ -27,6 +27,9 @@ suites:
     run_list:
       # - recipe[windows_patch_compliance::windows_patch]
     attributes:
+    verifier:
+      inspec_tests:
+        - https://github.com/chris-rock/windows-patch-benchmark
     driver:
       network:
         - ['private_network', {ip: '33.33.33.30'}]
