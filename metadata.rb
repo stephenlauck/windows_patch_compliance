@@ -7,3 +7,4 @@ long_description 'Installs/Configures windows_patch_compliance'
 version '0.1.0'
 
 depends 'chef-ingredient'
+depends 'wsus-client'
