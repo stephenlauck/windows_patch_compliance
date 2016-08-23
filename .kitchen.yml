@@ -1,6 +1,10 @@
 ---
 driver:
   name: vagrant
+  gui: true
+  customize:
+    memory: 2048
+    cpus: 2
 
 provisioner:
   name: chef_zero
@@ -9,11 +13,36 @@ verifier:
   name: inspec
 
 platforms:
-  - name: ubuntu-16.04
   - name: centos-7.2
+  - name: opentable/win-2012r2-standard-amd64-nocm
+    os_type: windows
+    shell_type: powershell
+    driver:
+      box: opentable/win-2012r2-standard-amd64-nocm
+      box_url: https://atlas.hashicorp.com/opentable/boxes/win-2012r2-standard-amd64-nocm
+    transport:
+      name: winrm
+      elevated: true
 
 suites:
-  - name: default
+  - name: windows2012r2
+    excludes: centos-7.2
     run_list:
       - recipe[windows_patch_compliance::default]
     attributes:
+    driver:
+      network:
+        - ['private_network', {ip: '33.33.33.30'}]
+
+  - name: compliance
+    excludes: opentable/win-2012r2-standard-amd64-nocm
+    run_list:
+      - recipe[test::compliance]
+    attributes:
+    driver:
+      vm_hostname: compliance.services.com
+      network:
+        - ['private_network', {ip: '33.33.33.40'}]
+      customize:
+        memory: 1024
+        cpus: 1
