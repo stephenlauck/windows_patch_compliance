@@ -1,11 +1,7 @@
 ---
 driver:
   name: vagrant
-  gui: true
-  customize:
-    memory: 2048
-    cpus: 2
-
+  
 provisioner:
   name: chef_zero
 
@@ -18,6 +14,7 @@ platforms:
     os_type: windows
     shell_type: powershell
     driver:
+      gui: true
       box: opentable/win-2012r2-standard-amd64-nocm
       box_url: https://atlas.hashicorp.com/opentable/boxes/win-2012r2-standard-amd64-nocm
     transport:
@@ -33,14 +30,17 @@ suites:
     driver:
       network:
         - ['private_network', {ip: '33.33.33.30'}]
+      customize:
+        memory: 2048
+        cpus: 2
 
   - name: compliance
     excludes: opentable/win-2012r2-standard-amd64-nocm
     run_list:
-      - recipe[test::compliance]
+      - recipe[windows_patch_compliance::compliance]
     attributes:
     driver:
-      vm_hostname: compliance.services.com
+      vm_hostname: compliance.patch.io
       network:
         - ['private_network', {ip: '33.33.33.40'}]
       customize:
