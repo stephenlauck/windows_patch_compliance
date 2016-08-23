@@ -9,5 +9,5 @@ end
 
 wsus_client_update 'WSUS updates' do
   action [:download, :install]
-  notifies :reboot_now, 'reboot[Restart Computer]', :immediately
+  notifies :reboot_now, 'reboot[Restart Computer]'
 end
