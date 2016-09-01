@@ -10,13 +10,13 @@ verifier:
 
 platforms:
   - name: centos-7.2
-  - name: opentable/win-2012r2-standard-amd64-nocm
+  - name: mwrock/Windows2012R2
     os_type: windows
     shell_type: powershell
     driver:
       gui: true
-      box: opentable/win-2012r2-standard-amd64-nocm
-      box_url: https://atlas.hashicorp.com/opentable/boxes/win-2012r2-standard-amd64-nocm
+      box: mwrock/Windows2012R2
+      box_url: https://atlas.hashicorp.com/mwrock/boxes/Windows2012R2
     transport:
       name: winrm
       elevated: true
