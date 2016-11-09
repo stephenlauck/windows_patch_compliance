@@ -38,8 +38,9 @@ suites:
         cpus: 2
 
   - name: compliance
-    excludes: opentable/win-2012r2-standard-amd64-nocm
+    excludes: mwrock/Windows2012R2
     run_list:
+      - recipe[ntp]
       - recipe[windows_patch_compliance::compliance]
     attributes:
     driver:
@@ -47,5 +48,5 @@ suites:
       network:
         - ['private_network', {ip: '33.33.33.40'}]
       customize:
-        memory: 1024
-        cpus: 1
+        memory: 4096
+        cpus: 4
